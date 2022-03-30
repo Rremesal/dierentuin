@@ -7,7 +7,7 @@
 </head>
 <body id="emptyOverviewPage">
     <?php require("menu.php"); ?>
-    <h1>Overzicht lege verblijven</h1>
+    <h1 class="header">Overzicht lege verblijven</h1>
     <table>
         <th>Verblijfnummer</th>
         <th>Verblijfssoort</th>

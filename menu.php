@@ -13,6 +13,7 @@
         <a href="registerpage.php">VERBLIJF REGISTREREN</a> 
         <a href="overview.php">OVERZICHT</a>
         <a href="emptyoverview.php">LEGE VERBLIJVEN</a>
+        <a href="placinghistory.php">GESCHIEDENIS PLAATSING</a>
     </div>
     
 
@@ -24,6 +25,7 @@
         <a href="home.php">HOME</a>
         <a href="addpage.php">DIEREN TOEVOEGEN</a>
         <a href="overview.php">OVERZICHT</a>
+        <a href="placinghistory.php">GESCHIEDENIS PLAATSING</a>
     </div>
 <?php } ?>
 

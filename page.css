@@ -273,8 +273,8 @@ td {
     font-size: 17px;
 }
 
-/* De CSS voor emptyoverview.php */
-#emptyOverviewPage {
+/* De CSS voor pagina's met tabellen.php */
+body {
     background-color: burlywood;
     margin: 0;
 }

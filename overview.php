@@ -160,12 +160,13 @@
                     $stm = $conn->prepare($animalHistoryQuery);
                     if($stm->execute()) {
                         echo "toegevoegd aan geschiedenis";
+                        $animalquery = "UPDATE animal an LEFT JOIN animal_animalhouse anah ON anah.animal_id = an.animal_id LEFT JOIN animalhouse ah ON ah.animalhouse_id = anah.animalhouse_id SET an.behavior='$newBehavior', ah.animalhouse_no=$newAnimalhouseNumber, ah.area='$newArea' WHERE name='$name'";
+                        $stm = $conn->prepare($animalquery);
+                        $stm->execute();
                     } else echo "data niet geupload naar geschiedenis";
                 } else echo "iets is misgegaan!";
                 
-                $animalquery = "UPDATE animal an LEFT JOIN animal_animalhouse anah ON anah.animal_id = an.animal_id LEFT JOIN animalhouse ah ON ah.animalhouse_id = anah.animalhouse_id SET an.behavior='$newBehavior', ah.animalhouse_no=$newAnimalhouseNumber, ah.area='$newArea' WHERE name='$name'";
-                $stm = $conn->prepare($animalquery);
-                $stm->execute();
+                
 
             }
 
