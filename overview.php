@@ -105,7 +105,7 @@
         }
     ?>
         </table>
-
+        <!--  KOPPEL VERBLIJFSNUMMER AAN DE LEGE VERBLIJVEN (ZIE EMPTYOVERVIEW.PHP) -->
         <h2 class="header">Verplaatsen</h2>
         <div id="moveDiv">
             <form method="POST">
@@ -128,7 +128,19 @@
                     <option>kalm</option>
                     <option>aggressief</option>
                 </select>
-                <input  id="animalhouseNoChange" type="text" name="animalhouseNoChange" placeholder="verblijfsnummer"/>
+                <select name="animalhouseNoChange">
+                <?php
+                    
+                    $query = "SELECT animalhouse_no FROM animalhouse WHERE animalhouse_id NOT IN (SELECT animalhouse_id FROM animal_animalhouse);";
+                    //$query = "SELECT animalhouse_no FROM animalhouse";
+                    $stm = $conn->prepare($query);
+                    if($stm->execute()) {
+                        while($rows = $stm->fetch(PDO::FETCH_ASSOC)) {
+                            echo "<option>".$rows['animalhouse_no']."</option>";
+                        }
+                    }
+                ?>
+                </select>
                 <select name="areaChange">
                         <option>----- gebied -----</option>
                         <option>Afrika</option>
@@ -156,13 +168,31 @@
                     $data = $stm->fetch(PDO::FETCH_OBJ);
                     
                     $animalHistoryQuery = "INSERT INTO history (animal_id,name,animal_sort,behavior,animalhouse_no,animalhouse_sort,area,date_placed) VALUES ($data->animal_id,'$data->name','$data->species', '$data->behavior',$data->animalhouse_no,'$data->animalhouse_sort','$data->area',now())";
-                    echo $animalHistoryQuery;
                     $stm = $conn->prepare($animalHistoryQuery);
                     if($stm->execute()) {
                         echo "toegevoegd aan geschiedenis";
-                        $animalquery = "UPDATE animal an LEFT JOIN animal_animalhouse anah ON anah.animal_id = an.animal_id LEFT JOIN animalhouse ah ON ah.animalhouse_id = anah.animalhouse_id SET an.behavior='$newBehavior', ah.animalhouse_no=$newAnimalhouseNumber, ah.area='$newArea' WHERE name='$name'";
-                        $stm = $conn->prepare($animalquery);
-                        $stm->execute();
+                        $queryAnimalhouseId = "SELECT animalhouse_id FROM animalhouse WHERE animalhouse_no=$newAnimalhouseNumber";
+                        $stm = $conn->prepare($queryAnimalhouseId);
+                        if($stm->execute()) {
+                            $data = $stm->fetch(PDO::FETCH_OBJ);
+                            $queryAnimalId = "SELECT animal_id FROM animal WHERE name='$name'";
+                            $stm = $conn->prepare($queryAnimalId);
+                            if($stm->execute()) {
+                                $dataAnimalId = $stm->fetch(PDO::FETCH_OBJ);
+                                $queryUpdate = "UPDATE animal_animalhouse SET animalhouse_id=$data->animalhouse_id WHERE $data2->animal_id";
+                                $stm = $conn->prepare($queryUpdate);
+                                if($stm->execute()) {
+                                    echo "update gelukt";
+                                }
+                            }
+                            
+                        }
+                        
+                        
+
+                         
+
+                        
                     } else echo "data niet geupload naar geschiedenis";
                 } else echo "iets is misgegaan!";
                 
