@@ -58,9 +58,9 @@
                 
             //checks if there is a value in the searchbar and what that value is
             } else if (isset($searchedValue)) {
-                $searchedName = $_POST['searchfield'];
+                $searched = $_POST['searchfield'];
                 //gets all the relevant data from the animal, animal_animalhouse and animalhouse
-                $query2="SELECT * FROM animal an LEFT JOIN animal_animalhouse anah ON anah.animal_id = an.animal_id LEFT JOIN animalhouse ah ON ah.animalhouse_id = anah.animalhouse_id WHERE name LIKE '%$searchedName%'";
+                $query2="SELECT * FROM animal an LEFT JOIN animal_animalhouse anah ON anah.animal_id = an.animal_id LEFT JOIN animalhouse ah ON ah.animalhouse_id = anah.animalhouse_id WHERE name LIKE '%$searched%' OR area LIKE '%$searched%' OR animalhouse_sort LIKE '%$searched%'";
                 $stm=$conn->prepare($query2);
                 $stm->execute();
 
