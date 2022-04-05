@@ -141,17 +141,6 @@
                     }
                 ?>
                 </select>
-                <select name="areaChange">
-                        <option>----- gebied -----</option>
-                        <option>Afrika</option>
-                        <option>Australië</option>
-                        <option>Azië</option>
-                        <option>Europa</option>
-                        <option>Noord-Amerika</option>
-                        <option>Oceanium</option>
-                        <option>Zuid-Amerika</option>
-                        <option>Riviera</option>
-                </select>
                 <input type="submit" name="btnChange" id="btnSubmit" value="Verplaats"/>
             </form>
         </div>
@@ -160,7 +149,7 @@
                 $newBehavior = $_POST['behaviorChange'];
                 $name = $_POST['animalName'];
                 $newAnimalhouseNumber = $_POST['animalhouseNoChange'];
-                $newArea = $_POST['areaChange'];
+                
 
                 $animalquery = "SELECT * FROM animal an LEFT JOIN animal_animalhouse anah ON anah.animal_id = an.animal_id LEFT JOIN animalhouse ah ON ah.animalhouse_id = anah.animalhouse_id WHERE name='$name'";
                 $stm = $conn->prepare($animalquery);
@@ -183,6 +172,11 @@
                                 $stm = $conn->prepare($queryUpdate);
                                 if($stm->execute()) {
                                     echo "update gelukt";
+                                    $queryUpdateBehavior = "UPDATE animal SET behavior='$newBehavior' WHERE animal_id=$dataAnimalId->animal_id";
+                                    $stm = $conn->prepare($queryUpdateBehavior);
+                                    if($stm->execute()) {
+                                
+                                    }
                                 }
                             }
                             
