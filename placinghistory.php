@@ -10,8 +10,9 @@
     <h1 class="header">Geschiedenis Plaatsing</h1>
     <div id="toolsDiv">
         <form method="POST">
+        <input type="radio" name="radioDate"/> Laatste datum eerst <br/>
+        <br/>
             Zoeken: <input type="text" name="searchbar"/>
-            <input type="radio" name="radioDate"/> Laatste datum eerst
             <input type="submit" name="btnSubmit" value="Filteren"/>
 
 
