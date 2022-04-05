@@ -280,6 +280,14 @@ body {
 }
 
 
+/* De CSS voor placinghistory.php  */ 
+#toolsDiv {
+    background-color: orange;
+    margin-left: 10%;
+    width: 1023px;
+}
+
+
 
 
 
