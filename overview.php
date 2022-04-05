@@ -179,7 +179,7 @@
                             $stm = $conn->prepare($queryAnimalId);
                             if($stm->execute()) {
                                 $dataAnimalId = $stm->fetch(PDO::FETCH_OBJ);
-                                $queryUpdate = "UPDATE animal_animalhouse SET animalhouse_id=$data->animalhouse_id WHERE $data2->animal_id";
+                                $queryUpdate = "UPDATE animal_animalhouse SET animalhouse_id=$data->animalhouse_id WHERE $dataAnimalId->animal_id";
                                 $stm = $conn->prepare($queryUpdate);
                                 if($stm->execute()) {
                                     echo "update gelukt";
