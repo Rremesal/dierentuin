@@ -179,7 +179,7 @@
     padding-bottom: 11%;
 }
 
-#addForm input, select {
+#addForm input, #addForm select {
     font-size: 19px;
 }
 
@@ -209,19 +209,8 @@
 }
 
 
-#searchfield {
-    margin-bottom: 10px;
-    height: 22px;
-}
-
 #searchLabel {
     margin-left: 10%;
-}
-
-#search {
-    height: 3%;
-    width: 8%;
-    font-size: 18px;
 }
 
 .overviewRadio {
@@ -263,26 +252,14 @@ td {
     margin-left: 10%;
 }
 
-#animalhouseNoChange {
-    width: 140px;
-    height: 20px;
-    font-size: 17px;
-}
-
-#btnSubmit {
-    font-size: 17px;
-}
-
 /* De CSS voor pagina's met tabellen.php */
 body {
     background-color: burlywood;
     margin: 0;
 }
 
-
 /* De CSS voor placinghistory.php  */ 
-#toolsDiv {
-    background-color: orange;
+.toolsDiv {
     margin-left: 10%;
     width: 1023px;
 }

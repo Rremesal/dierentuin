@@ -1,3 +1,4 @@
+<?php include("zoodatabase.php"); ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,6 +17,7 @@
             <label id="searchLabel">Zoeken: <input type="text" name="searchfield" id="searchfield"/></label>
             <input type="submit" name="searchButton" id="search" value="Zoeken"/>
         </form>
+        <br/>
         <table>
             <th>Naam</th>
             <th>Diersoort</th>
@@ -25,7 +27,7 @@
             <th>Gebied</th>
             <th>Datum Plaatsing</th>
     <?php 
-        include("zoodatabase.php");
+        
         //does something when the 'Zoeken' button has been pressed
         if (isset($_POST['searchButton'])) {
             //puts the value inputted by the user in a variable
