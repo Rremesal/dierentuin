@@ -16,8 +16,6 @@
             <input class="input" name="password" type="password"/>
             <br/>
             <br/>
-            <input type="checkbox" name="isAdmin"/>admin rechten
-            <br/>
             <input id="userButton" type="submit" name="userButton" value="Maak account"/>
         </form>
         <?php
@@ -28,13 +26,8 @@
                 //puts the values inputted by the user in a variable
                 $username = $_POST['username'];
                 $password = $_POST['password'];
-                $isAdmin = $_POST['isAdmin'];
-                //checks if the 'admin rechten' checkbox has been checked
-                if(isset($isAdmin)){
-                    //executes a query to put the username,password and admin-state (is admin) in the database
-                    $query = "INSERT INTO login (username,password,admin) VALUES ('$username','$password',1)";
                 //executes a query to put the username,password and admin-state (is not admin) in the database
-                } else $query = "INSERT INTO login (username,password,admin) VALUES ('$username','$password',0)";
+                $query = "INSERT INTO login (username,password,admin) VALUES ('$username','$password',0)";
                 
                 $stm = $conn->prepare($query);
                 if($stm->execute()){
