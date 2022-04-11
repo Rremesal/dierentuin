@@ -27,12 +27,12 @@
                 <select name="animalhouseNo">
                 <?php
                     
-                    $query = "SELECT animalhouse_no FROM animalhouse WHERE animalhouse_id NOT IN (SELECT animalhouse_id FROM animal_animalhouse);";
+                    $query = "SELECT * FROM animalhouse WHERE animalhouse_id NOT IN (SELECT animalhouse_id FROM animal_animalhouse);";
                     //$query = "SELECT animalhouse_no FROM animalhouse";
                     $stm = $conn->prepare($query);
                     if($stm->execute()) {
                         while($rows = $stm->fetch(PDO::FETCH_ASSOC)) {
-                            echo "<option>".$rows['animalhouse_no']."</option>";
+                            echo "<option value='".$rows['animalhouse_no']."'>".$rows['animalhouse_no']." - ".$rows['animalhouse_sort']."</option>";
                         }
                     }
                 ?>
