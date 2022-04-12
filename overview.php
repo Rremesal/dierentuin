@@ -15,7 +15,7 @@
             <label><input type="radio" class="overviewRadio" name="radio" value="Op gebied"></input>Op gebied</label><br/>
             <br/>
             <label id="searchLabel">Zoeken: <input type="text" name="searchfield" id="searchfield"/></label>
-            <input type="submit" name="searchButton" id="search" value="Zoeken"/>
+            <input type="submit" name="searchButton" class="submitButton" value="Zoeken"/>
         </form>
         <br/>
         <table>
@@ -143,7 +143,7 @@
                     }
                 ?>
                 </select>
-                <input type="submit" name="btnChange" id="btnSubmit" value="Verplaats"/>
+                <input type="submit" name="btnChange" class="submitButton" value="Verplaats"/>
             </form>
         </div>
         <?php

@@ -11,7 +11,7 @@
     <div class="toolsDiv">
         <form method="POST">
             Zoeken: <input type="text" name="searchbar"/>
-            <input type="submit" name="btnSubmit" value="Zoeken"/>
+            <input class="submitButton" type="submit" name="btnSubmit" value="Zoeken"/>
         </form>
     </div>
     <br/>

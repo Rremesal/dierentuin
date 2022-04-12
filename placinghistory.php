@@ -13,7 +13,7 @@
         <input type="radio" name="radioDate"/> Laatste datum eerst <br/>
         <br/>
             Zoeken: <input type="text" name="searchbar"/>
-            <input type="submit" name="btnSubmit" value="Filteren"/>
+            <input type="submit" class="submitButton" name="btnSubmit" value="Filteren"/>
 
 
         </form>

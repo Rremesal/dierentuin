@@ -39,7 +39,7 @@
                 </select>
                 <br/>
                 <br/>
-                <input id="button" type="submit" name="submit" value="Toevoegen"/>
+                <input class="submitButton" type="submit" name="submit" value="Toevoegen"/>
             </form>
         <?php
             //does something when the 'Toevoegen' button has been pressed

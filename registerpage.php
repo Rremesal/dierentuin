@@ -31,7 +31,7 @@
                 </select> 
                 <br/>
                 <br/>
-                <input type="submit" id="registerButton" name="registerButton" value="Toevoegen"/>
+                <input type="submit" class="submitButton" name="registerButton" value="Toevoegen"/>
             </form>
             <?php 
                 include("zoodatabase.php");
