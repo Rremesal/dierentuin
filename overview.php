@@ -107,7 +107,6 @@
         }
     ?>
         </table>
-        <!--  KOPPEL VERBLIJFSNUMMER AAN DE LEGE VERBLIJVEN (ZIE EMPTYOVERVIEW.PHP) -->
         <h2 class="header">Verplaatsen</h2>
         <div id="moveDiv">
             <form method="POST">
@@ -143,6 +142,7 @@
                     }
                 ?>
                 </select>
+                <input type="date" name="changedDate"/>
                 <input type="submit" name="btnChange" class="submitButton" value="Verplaats"/>
             </form>
         </div>
@@ -158,29 +158,29 @@
                 if($stm->execute()) {
                     $data = $stm->fetch(PDO::FETCH_OBJ);
                     
-                    $animalHistoryQuery = "INSERT INTO history (animal_id,name,animal_sort,behavior,animalhouse_no,animalhouse_sort,area,date_placed) VALUES ($data->animal_id,'$data->name','$data->species', '$data->behavior',$data->animalhouse_no,'$data->animalhouse_sort','$data->area',now())";
+                    $animalHistoryQuery = "INSERT INTO history (animal_id,name,animal_sort,behavior,animalhouse_no,animalhouse_sort,area,date_placed) VALUES ($data->animal_id,'$data->name','$data->species', '$data->behavior',$data->animalhouse_no,'$data->animalhouse_sort','$data->area','$data->date')";
                     $stm = $conn->prepare($animalHistoryQuery);
                     if($stm->execute()) {
                         $queryAnimalhouseId = "SELECT animalhouse_id FROM animalhouse WHERE animalhouse_no=$newAnimalhouseNumber";
                         $stm = $conn->prepare($queryAnimalhouseId);
-                        echo $queryAnimalhouseId;
                         if($stm->execute()) {
                             $data = $stm->fetch(PDO::FETCH_OBJ);
                             $queryAnimalId = "SELECT animal_id FROM animal WHERE name='$name'";
                             $stm = $conn->prepare($queryAnimalId);
-                            echo "OK 1";
                             if($stm->execute()) {
                                 $dataAnimalId = $stm->fetch(PDO::FETCH_OBJ);
-                                $queryUpdate = "UPDATE animal_animalhouse SET animalhouse_id=$data->animalhouse_id WHERE animal_id=$dataAnimalId->animal_id";
+                                if(isset($_POST['changedDate'])) {
+                                    $changedDate = $_POST['changedDate'];
+                                    $queryUpdate = "UPDATE animal_animalhouse SET animalhouse_id=$data->animalhouse_id WHERE animal_id=$dataAnimalId->animal_id";
+                                } else {
+                                    $queryUpdate = "UPDATE animal_animalhouse SET animalhouse_id=$data->animalhouse_id,date='$changedDate' WHERE animal_id=$dataAnimalId->animal_id";
+                                }
                                 $stm = $conn->prepare($queryUpdate);
-                                echo "OK 2";
                                 if($stm->execute()) {
                                     echo "verblijfplaats geüpdatet";
                                     $queryUpdateBehavior = "UPDATE animal SET behavior='$newBehavior' WHERE animal_id=$dataAnimalId->animal_id";
                                     $stm = $conn->prepare($queryUpdateBehavior);
-                                    echo "OK 3";
                                     if($stm->execute()) {
-                                        echo "OK 4";
                                     }
                                 }
                             }
@@ -194,9 +194,7 @@
                         
                     } else echo "data niet geupload naar geschiedenis";
                 } else echo "iets is misgegaan!";
-                
-                
-
+                header("Refresh:0");
             }
 
         
