@@ -17,14 +17,15 @@
                 Diersoort:<br/> 
                 <input type="text" class="addInput" name="species" required/><br/>
                 Gedrag:<br/>
-                <select name="behavior">
+                <select name="behavior" required>
                     <option></option>
                     <option>kalm</option>
                     <option>aggresief</option>
+                    <option>onrustig</option>
                 </select>
                 <br/>
                 Verblijfnummer:<br/>
-                <select name="animalhouseNo">
+                <select name="animalhouseNo" required>
                 <?php
                     
                     $query = "SELECT * FROM animalhouse WHERE animalhouse_id NOT IN (SELECT animalhouse_id FROM animal_animalhouse);";
@@ -36,7 +37,9 @@
                         }
                     }
                 ?>
-                </select>
+                </select><br/>
+                Datum plaatsing:<br/>
+                <input type="date" name="dateInput"/>
                 <br/>
                 <br/>
                 <input class="submitButton" type="submit" name="submit" value="Toevoegen"/>
@@ -69,9 +72,15 @@
 
                 foreach($dataset1 as $anim) {
                     //put the animal_id and animalhouse_id value in the "animal_animalhouse" table
-                    $query4="INSERT INTO animal_animalhouse (animal_id,animalhouse_id,date) VALUES ($anim->animal_id,$anim->animalhouse_id,now())";
+                    if(isset($_POST['dateInput'])) {
+                        $dateInput = $_POST['dateInput'];
+                        $query4="INSERT INTO animal_animalhouse (animal_id,animalhouse_id,date) VALUES ($anim->animal_id,$anim->animalhouse_id,'$dateInput')";
+                    } else {
+                        $query4="INSERT INTO animal_animalhouse (animal_id,animalhouse_id,date) VALUES ($anim->animal_id,$anim->animalhouse_id,now())";
+                    }
                     $stm = $conn->prepare($query4);
                     $stm->execute();
+                    
                 }
             }
         ?>
