@@ -185,13 +185,7 @@
                                 }
                             }
                             
-                        }
-                        
-                        
-
-                         
-
-                        
+                        } 
                     } else echo "data niet geupload naar geschiedenis";
                 } else echo "iets is misgegaan!";
                 header("Refresh:0");
