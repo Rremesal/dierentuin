@@ -12,13 +12,13 @@
             <h3>Verblijf Registreren</h3>
             <form method="POST">
                 Verblijfnummer:<br/>
-                <input class="input" type="text" name="animalhouse_no"/>
+                <input class="input" type="text" name="animalhouse_no" required/>
                 <br>
                 Soort Verblijf:<br/>
-                <input class="input" type="text" name="animalhouse_sort"/>
+                <input class="input" type="text" name="animalhouse_sort" required/>
                 <br/>
                 Gebied:<br/>
-                <select name="area">
+                <select name="area" required>
                     <option></option>
                     <option>Afrika</option>
                     <option>Australië</option>
@@ -41,24 +41,27 @@
                     $animalhouseNumber = $_POST['animalhouse_no'];
                     $animalhouseSort = $_POST['animalhouse_sort'];
                     $area = $_POST['area'];
+                    if($animalhouseNumber instanceof int && $animalhouseSort instanceof string && $area instanceof string) {
+                        
 
-                    $query1 = "SELECT count(*) as aantal FROM animalhouse WHERE animalhouse_no = $animalhouseNumber";
-                    $stm = $conn->prepare($query1);
-                    if ($stm->execute()) {
-                        $data = $stm->fetch(PDO::FETCH_OBJ);
-                        if($data->aantal > 0) {
-                            $animalhouse->animalhouse;
-                        } else {
-                            //executes a query to fill the values inputted by the user in the database table 'animalhouse'
-                            $query2 = "INSERT INTO animalhouse (animalhouse_no,animalhouse_sort,area) VALUES ($animalhouseNumber,'$animalhouseSort','$area')";
-                            $stm = $conn->prepare($query2);
-                            if ($stm->execute()){
-                                //puts 'verblijf aangemaakt' on the screen
-                                echo "verblijf aangemaakt";
+                        $query1 = "SELECT count(*) as aantal FROM animalhouse WHERE animalhouse_no = $animalhouseNumber";
+                        $stm = $conn->prepare($query1);
+                        if ($stm->execute()) {
+                            $data = $stm->fetch(PDO::FETCH_OBJ);
+                            if($data->aantal > 0) {
+                                $animalhouse->animalhouse;
+                            } else {
+                                //executes a query to fill the values inputted by the user in the database table 'animalhouse'
+                                $query2 = "INSERT INTO animalhouse (animalhouse_no,animalhouse_sort,area) VALUES ($animalhouseNumber,'$animalhouseSort','$area')";
+                                $stm = $conn->prepare($query2);
+                                if ($stm->execute()){
+                                    //puts 'verblijf aangemaakt' on the screen
+                                    echo "verblijf aangemaakt";
+                                }
                             }
-                        }
-                
-                    } else echo "Het verblijfnummer bestaat al";
+                    
+                        } else echo "Het verblijfnummer bestaat al";
+                    } else echo "geen geldig verblijfnummer, verblijfssoort of gebied";
 
                 }
                     
