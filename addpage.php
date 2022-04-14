@@ -52,44 +52,36 @@
                 $name = $_POST['animalName'];
                 $species = $_POST['species'];
                 $behavior = $_POST['behavior'];
-                if($name instanceof string && $species instanceof string) {
-                    //puts the inputted name,species and behavior in the "animal" table 
-                    $query="INSERT INTO animal (name,species,behavior) VALUES ('$name','$species','$behavior')";
-                    $stm = $conn->prepare($query);
-                    $stm->execute();
+                //puts the inputted name,species and behavior in the "animal" table 
+                $query="INSERT INTO animal (name,species,behavior) VALUES ('$name','$species','$behavior')";
+                $stm = $conn->prepare($query);
+                $stm->execute();
 
-                    $animalhouseNo = $_POST['animalhouseNo'];
-                    //puts ...(name) has been added on the screen
-                    echo "$name is toegevoegd";
-            ?>
-                    </div>
-            <?php
+                $animalhouseNo = $_POST['animalhouseNo'];
+                //puts ...(name) has been added on the screen
+                echo "$name is toegevoegd";
+        ?>
+                </div>
+        <?php
 
-                    // get the id from the "animal" table
-                    $query3="SELECT animal_id,animalhouse_id FROM animal,animalhouse WHERE name='$name' AND animalhouse_no='$animalhouseNo'" ;
-                    $stm = $conn->prepare($query3);
-                    $stm->execute();
-                    $dataset1=$stm->fetchAll(PDO::FETCH_OBJ);
+                // get the id from the "animal" table
+                $query3="SELECT animal_id,animalhouse_id FROM animal,animalhouse WHERE name='$name' AND animalhouse_no='$animalhouseNo'" ;
+                $stm = $conn->prepare($query3);
+                $stm->execute();
+                $dataset1=$stm->fetchAll(PDO::FETCH_OBJ);
 
-                    foreach($dataset1 as $anim) {
-                        //put the animal_id and animalhouse_id value in the "animal_animalhouse" table
-                        if(isset($_POST['dateInput'])) {
-                            $dateInput = $_POST['dateInput'];
-                            $query4="INSERT INTO animal_animalhouse (animal_id,animalhouse_id,date) VALUES ($anim->animal_id,$anim->animalhouse_id,'$dateInput')";
-                        } else {
-                            $query4="INSERT INTO animal_animalhouse (animal_id,animalhouse_id,date) VALUES ($anim->animal_id,$anim->animalhouse_id,now())";
-                        }
-                        $stm = $conn->prepare($query4);
-                        $stm->execute();
-                        
+                foreach($dataset1 as $anim) {
+                    //put the animal_id and animalhouse_id value in the "animal_animalhouse" table
+                    if(isset($_POST['dateInput'])) {
+                        $dateInput = $_POST['dateInput'];
+                        $query4="INSERT INTO animal_animalhouse (animal_id,animalhouse_id,date) VALUES ($anim->animal_id,$anim->animalhouse_id,'$dateInput')";
+                    } else {
+                        $query4="INSERT INTO animal_animalhouse (animal_id,animalhouse_id,date) VALUES ($anim->animal_id,$anim->animalhouse_id,now())";
                     }
-                } else {
-                    echo "geen geldige naam of diersoort";
+                    $stm = $conn->prepare($query4);
+                    $stm->execute();
+                    
                 }
-                
-                
-
-              
             }
         ?>
 
